@@ -3,10 +3,18 @@ use crate::entities::template::Template;
 
 pub struct Input {}
 pub struct Output {
-    templates: Vec<Template>, 
+    pub templates: Vec<Template>, 
 }
+#[derive(Clone)]
 pub struct Deps {}
 
+impl Deps {
+    pub fn new() -> Self {
+        Deps {}
+    }
+}
+
+#[derive(Clone)]
 pub struct ListTemplatesUsecase {
     deps: Deps
 }

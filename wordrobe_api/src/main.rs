@@ -1,8 +1,12 @@
 use wordrobe_api::handlers::handlers;
+use wordrobe_api::di::{generate_usecase_container};
 
 #[tokio::main()]
 async fn main() {
     let port: u16 = 3030;
     println!("Server is running on port: {}", port);
-    warp::serve(handlers()).run(([127, 0, 0, 1], port)).await;
+
+    let usecase_container = generate_usecase_container();
+
+    warp::serve(handlers(usecase_container)).run(([127, 0, 0, 1], port)).await;
 }
