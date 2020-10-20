@@ -1,5 +1,5 @@
+use wordrobe_api::di::generate_usecase_container;
 use wordrobe_api::handlers::handlers;
-use wordrobe_api::di::{generate_usecase_container};
 
 #[tokio::main()]
 async fn main() {
@@ -8,5 +8,7 @@ async fn main() {
 
     let usecase_container = generate_usecase_container();
 
-    warp::serve(handlers(usecase_container)).run(([127, 0, 0, 1], port)).await;
+    warp::serve(handlers(usecase_container))
+        .run(([127, 0, 0, 1], port))
+        .await;
 }
