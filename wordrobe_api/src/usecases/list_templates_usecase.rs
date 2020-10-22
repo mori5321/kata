@@ -1,16 +1,22 @@
 use super::Usecase;
 use crate::domain::entities::template::Template;
+use crate::domain::repositories::template_repository::TemplateRepository;
+use std::sync::Arc;
 
 pub struct Input {}
 pub struct Output {
     pub templates: Vec<Template>,
 }
 #[derive(Clone)]
-pub struct Deps {}
+pub struct Deps {
+    template_repository: Arc<dyn TemplateRepository>,
+}
 
 impl Deps {
-    pub fn new() -> Self {
-        Deps {}
+    pub fn new(template_repository: Arc<dyn TemplateRepository>) -> Self {
+        Deps {
+            template_repository,
+        }
     }
 }
 

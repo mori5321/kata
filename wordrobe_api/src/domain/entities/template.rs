@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 // これをSerializeするのはダメ
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Template {
     title: Title,
     body: Body,
@@ -17,7 +17,7 @@ impl Template {
 }
 
 // これをSerializeするのはダメ
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 struct Title(String);
 
 impl Title {
@@ -27,7 +27,7 @@ impl Title {
 }
 
 // これをSerializeするのはダメ
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 struct Body(String);
 
 impl Body {

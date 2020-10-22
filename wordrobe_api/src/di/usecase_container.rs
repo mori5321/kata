@@ -1,4 +1,5 @@
 use crate::app_state::AppState;
+use crate::repositories::template_repository;
 use crate::usecases::list_templates_usecase;
 use crate::usecases::Usecase;
 use std::sync::Arc;
@@ -12,8 +13,11 @@ pub struct UsecaseContainer {
 // あとで参考にする
 // https://gitlab.com/telumnia/web-server/-/tree/master/src
 
-pub fn generate_usecase_container(_app_state: &AppState) -> UsecaseContainer {
-    let list_templates_usecase_deps = list_templates_usecase::Deps::new();
+pub fn generate_usecase_container(app_state: &AppState) -> UsecaseContainer {
+    let template_repository = Arc::new(template_repository::TemplateRepositoryOnDB::new(
+        app_state.pool().clone(),
+    ));
+    let list_templates_usecase_deps = list_templates_usecase::Deps::new(template_repository);
 
     let usecase_container = UsecaseContainer {
         list_templates_usecase: list_templates_usecase::ListTemplatesUsecase::new(
@@ -25,7 +29,8 @@ pub fn generate_usecase_container(_app_state: &AppState) -> UsecaseContainer {
 }
 
 pub fn generate_usecase_container_for_test() -> UsecaseContainer {
-    let list_templates_usecase_deps = list_templates_usecase::Deps::new();
+    let template_repository = Arc::new(template_repository::TemplateRepositoryOnMemory::new());
+    let list_templates_usecase_deps = list_templates_usecase::Deps::new(template_repository);
 
     let usecase_container = UsecaseContainer {
         list_templates_usecase: list_templates_usecase::ListTemplatesUsecase::new(
