@@ -25,7 +25,6 @@ async fn root_path(
 ) -> Result<impl warp::Reply, warp::Rejection> {
     let input = list_templates_usecase::Input {};
     let output = usecase_container.list_templates_usecase.run(input);
-    println!("{:?}", output.templates);
     respond_with_json(Ok(output.templates), warp::http::StatusCode::OK)
 }
 
