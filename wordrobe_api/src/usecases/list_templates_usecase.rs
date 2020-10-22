@@ -1,5 +1,5 @@
 use super::Usecase;
-use crate::entities::template::Template;
+use crate::domain::entities::template::Template;
 
 pub struct Input {}
 pub struct Output {
@@ -29,6 +29,7 @@ impl Usecase<Input, Output, Deps> for ListTemplatesUsecase {
             templates: vec![
                 Template::new("Hello".to_string(), "World".to_string()),
                 Template::new("Hello".to_string(), "World".to_string()),
+                Template::new("Hello World".to_string(), "This is music.".to_string()),
             ],
         };
         return output;

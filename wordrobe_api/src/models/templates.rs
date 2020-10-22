@@ -1,6 +1,6 @@
 #[derive(Queryable, Clone)]
 pub struct Templates {
-    id: i64,
-    title: String,
-    body: String,
+    pub id: i64,
+    pub title: String,
+    pub body: String,
 }
