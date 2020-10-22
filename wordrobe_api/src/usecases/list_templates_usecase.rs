@@ -31,13 +31,9 @@ impl Usecase<Input, Output, Deps> for ListTemplatesUsecase {
     }
 
     fn run(&self, _input: Input) -> Output {
-        let output = Output {
-            templates: vec![
-                Template::new("Hello".to_string(), "World".to_string()),
-                Template::new("Hello".to_string(), "World".to_string()),
-                Template::new("Hello World".to_string(), "This is music.".to_string()),
-            ],
-        };
+        let templates = self.deps.template_repository.list();
+
+        let output = Output { templates };
         return output;
     }
 }
