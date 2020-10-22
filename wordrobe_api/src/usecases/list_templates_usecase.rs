@@ -3,7 +3,7 @@ use crate::entities::template::Template;
 
 pub struct Input {}
 pub struct Output {
-    pub templates: Vec<Template>, 
+    pub templates: Vec<Template>,
 }
 #[derive(Clone)]
 pub struct Deps {}
@@ -16,7 +16,7 @@ impl Deps {
 
 #[derive(Clone)]
 pub struct ListTemplatesUsecase {
-    deps: Deps
+    deps: Deps,
 }
 
 impl Usecase<Input, Output, Deps> for ListTemplatesUsecase {
@@ -28,8 +28,8 @@ impl Usecase<Input, Output, Deps> for ListTemplatesUsecase {
         let output = Output {
             templates: vec![
                 Template::new("Hello".to_string(), "World".to_string()),
-                Template::new("Hello".to_string(), "World".to_string())
-            ]
+                Template::new("Hello".to_string(), "World".to_string()),
+            ],
         };
         return output;
     }
