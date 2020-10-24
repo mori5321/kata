@@ -1,8 +1,10 @@
 mod counter;
+mod todo;
 
-use counter::Counter;
-use iced::{Sandbox, Settings};
+use counter::counter;
+use iced::{sandbox, settings};
+use todo::todos;
 
 pub fn main() {
-    Counter::run(Settings::default())
+    counter::run(settings::default())
 }
