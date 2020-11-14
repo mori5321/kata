@@ -1,8 +1,8 @@
 use dotenv::dotenv;
-use wordrobe_api::app_state::AppState;
-use wordrobe_api::db::gen_mysql_pool;
-use wordrobe_api::di::generate_usecase_container;
-use wordrobe_api::handlers::handlers;
+use kata_api::app_state::AppState;
+use kata_api::db::gen_mysql_pool;
+use kata_api::di::generate_usecase_container;
+use kata_api::handlers::handlers;
 
 #[tokio::main()]
 async fn main() {

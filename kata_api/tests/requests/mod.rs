@@ -1,9 +1,9 @@
 #[cfg(test)]
 mod tests {
+    use kata_api::di::generate_usecase_container_for_test;
+    use kata_api::handlers::handlers;
     use serde::{Deserialize, Serialize};
     use serde_json::json;
-    use wordrobe_api::di::generate_usecase_container_for_test;
-    use wordrobe_api::handlers::handlers;
 
     // Memo: Is it a good way to have a dependency on DTO?
     #[derive(Debug, Serialize, Deserialize, PartialEq)]

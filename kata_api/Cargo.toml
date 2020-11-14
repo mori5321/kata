@@ -1,9 +1,9 @@
 [package]
-name = "wordrobe_api"
+name = "kata_api"
 version = "0.1.0"
 authors = ["mori5321 <moriwm77@gmail.com>"]
 edition = "2018"
-
+default-run = "kata_api"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
@@ -23,3 +23,4 @@ tonic-build = "0.3"
 [[bin]]
 name = "grpc"
 path = "src/bin/grpc.rs"
+
