@@ -5,4 +5,4 @@ watch:
 	cargo watch -i .gitignore -i "static/*" -s "make build"
 
 serve:
-	miniserve ./static --index index.html
+	miniserve ./static --index index.html --port 9000
