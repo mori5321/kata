@@ -299,6 +299,7 @@ dependencies = [
  "anyhow",
  "log",
  "serde",
+ "serde_derive",
  "strum",
  "strum_macros",
  "wasm-bindgen",
