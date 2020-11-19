@@ -6,3 +6,6 @@ watch:
 
 serve:
 	servor ./static index.html 9000
+
+hotserve:
+	concurrently --raw "$(MAKE) watch & $(MAKE) serve" 
