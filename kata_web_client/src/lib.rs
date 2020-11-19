@@ -1,6 +1,9 @@
 #![recursion_limit = "512"]
+
+extern crate css_rs_macro;
 use wasm_bindgen::prelude::*;
 
+mod consts;
 mod examples;
 
 #[wasm_bindgen(start)]

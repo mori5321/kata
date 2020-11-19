@@ -1,11 +1,12 @@
-use css_in_rust::style::Style;
+use crate::consts::colors::*;
+use css_in_rust::*;
 use yew::prelude::*;
-use yew_router::prelude::{Router, Switch};
+use yew_router::prelude::{Router, RouterAnchor, Switch};
 
 #[derive(Switch, Debug, Clone)]
 pub enum AppRoute {
     #[to = "/profile/{id}"]
-    Profile(i32),
+    Profile(u32),
     #[to = "/"]
     Index,
 }
@@ -36,10 +37,10 @@ impl Component for Model {
                 render = Router::render(|switch: AppRoute| {
                     match switch {
                         AppRoute::Profile(id) => html!{
-                            {page()}
+                            {page(format!("Profile {}", id.to_string()))}
                         },
                         AppRoute::Index => html!{
-                            <h1>{"Index"}</h1>
+                            {page("Index".to_string())}
                         },
                     }
                 })
@@ -48,37 +49,68 @@ impl Component for Model {
     }
 }
 
-fn page() -> Html {
+type AppAnchor = RouterAnchor<AppRoute>;
+
+fn page(title: String) -> Html {
     html! {
         <div class=style()>
-            <h1 class="heading">{"Page Sample"}</h1>
-            <p class="paragraph">{"This is it.."}</p>
+            <div>
+                <h1 class="heading">{title}</h1>
+                <p class="paragraph">{"This is it.."}</p>
+                <AppAnchor route=AppRoute::Index>
+                    {"Index"}
+                </AppAnchor>
+                <AppAnchor route=AppRoute::Profile(3)>
+                    {"Profile"}
+                </AppAnchor>
+            </div>
         </div>
     }
 }
 
+// 結論としてCSS in Rustは使えん...
 fn style() -> Style {
-    let color = "black";
-    let background_color = format!("background-color: {};", color);
-
     let style = Style::create(
-        "Page",
-        background_color
-            + r#" 
-            .heading {
-                color: white;
-                font-size: 20px;
-            }
+        "Component",
+        format!(
+            "
+            background-color: {};
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
 
-            .heading:hover {
-                color: blue;
-            }
+            .heading {{
+                color: {};
+                font-size: 32px;
+                padding: 16px 0 0;
+            }}
 
-            .paragraph {
-                color: white;
+            .paragraph {{
+                color: {};
                 font-size: 12px;
-            }
-        "#,
+                padding: 0 0 16px;
+            }}
+
+            a {{
+                display: block;
+                text-decoration: underline;
+                color: {};
+                font-size: 12px;
+            }}
+
+            a:hover {{
+                color: {}
+            }}
+        ",
+            basic_colorset().background_primary,
+            basic_colorset().text_white,
+            basic_colorset().text_white,
+            basic_colorset().text_white,
+            basic_colorset().brand_tertiary,
+        ),
     )
     .unwrap();
 
