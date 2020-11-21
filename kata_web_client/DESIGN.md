@@ -1,0 +1,18 @@
+# Module Design
+- consts/
+- drivers
+  - apis
+- deps
+  - mod.rs
+- entities
+- repositories
+  - xxxxrepository.rs
+- components/
+  - common/
+  - module/
+  - pages/
+    - xxxxpage
+      - page.rs
+      - layout.rs
+- route.rs
+- lib.rs

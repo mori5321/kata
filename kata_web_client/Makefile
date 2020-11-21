@@ -11,8 +11,14 @@ build.release:
 watch:
 	cargo watch -i .gitignore -i "static/*" -s "make build.dev"
 
+watch.release:
+	cargo watch -i .gitignore -i "static/*" -s "make build.release"
+
 serve:
 	servor ./static index.html 9000
 
 hotserve:
-	concurrently --raw "$(MAKE) watch & $(MAKE) serve" 
+	concurrently --raw "$(MAKE) watch & $(MAKE) serve"
+
+hotserve.release:
+	concurrently --raw "$(MAKE) watch.release & $(MAKE) serve"

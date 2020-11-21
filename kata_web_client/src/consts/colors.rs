@@ -3,6 +3,7 @@ type Color = String;
 struct ColorPalette {
     sumi: Color,
     usuzumi: Color,
+    kurogane: Color,
     nibi: Color,
     shironezumi: Color,
     kawasago: Color,
@@ -20,6 +21,7 @@ fn palette() -> ColorPalette {
     ColorPalette {
         sumi: "#1C1C1C".to_string(),
         usuzumi: "#2B2B2B".to_string(),
+        kurogane: "#3C3C3C".to_string(),
         nibi: "#656765".to_string(),
         shironezumi: "#BDC0BA".to_string(),
         kawasago: "#ECECEC".to_string(),
@@ -53,6 +55,8 @@ pub struct ColorSet {
     pub text_white: Color,
     pub border_primary: Color,
     pub border_secondary: Color,
+    pub border_white: Color,
+    pub shadow_primary: Color,
 }
 
 pub fn basic_colorset() -> ColorSet {
@@ -66,15 +70,17 @@ pub fn basic_colorset() -> ColorSet {
         accent_primary: palette.jinzamomi.clone(),
         accent_secondary: palette.hanahada.clone(),
         background_primary: palette.usuzumi.clone(),
-        background_secondary: palette.nibi.clone(),
-        background_tertiary: palette.kawasago.clone(),
-        background_quaternary: palette.gofun.clone(),
-        background_quinary: palette.sumi.clone(),
+        background_secondary: palette.kurogane.clone(),
+        background_tertiary: palette.sumi.clone(),
+        background_quaternary: palette.kawasago.clone(),
+        background_quinary: palette.gofun.clone(),
         text_primary: palette.sumi.clone(),
         text_secondary: palette.usuzumi.clone(),
         text_tertiary: palette.nibi.clone(),
         text_white: palette.gofun.clone(),
         border_primary: palette.shironezumi.clone(),
         border_secondary: palette.nibi.clone(),
+        border_white: palette.gofun.clone(),
+        shadow_primary: palette.sumi.clone(),
     }
 }
