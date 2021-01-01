@@ -1,6 +1,6 @@
 #![recursion_limit = "512"]
-
-extern crate css_rs_macro;
+#[macro_use]
+use css_modules_rs;
 use wasm_bindgen::prelude::*;
 
 mod components;

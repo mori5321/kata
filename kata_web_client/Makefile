@@ -9,10 +9,10 @@ build.release:
 
 
 watch:
-	cargo watch -i .gitignore -i "static/*" -s "make build.dev"
+	cargo watch -i .gitignore -i "static/*" -i -s "make build.dev"
 
 watch.release:
-	cargo watch -i .gitignore -i "static/*" -s "make build.release"
+	cargo watch -i .gitignore -i "static/*" -i -s "make build.release"
 
 serve:
 	servor ./static index.html 9000

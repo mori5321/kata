@@ -1,4 +1,4 @@
-type Color = String;
+pub type Color = String;
 
 struct ColorPalette {
     sumi: Color,
