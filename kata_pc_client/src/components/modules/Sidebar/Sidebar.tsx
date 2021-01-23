@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { css } from "emotion";
 import { basicColorSet } from '@/consts/colors';
-import { toplevelRoutes, templatesRoutes } from '@/route';
-import { Link, useNavigate } from 'rocon/react';
+import { toplevelRoutes } from '@/router/route';
+import { Link } from 'rocon/react';
 import { Avatar } from '@/components/modules/Avatar';
+import { plainLinkStyle } from '@/router/linkStyle';
 
 const sidebarWrapperStyle = css`
   background-color: ${basicColorSet.backgroundSecondary};
@@ -15,27 +16,20 @@ const sidebarWrapperStyle = css`
   align-items: center;
   
   a {
-    color: ${basicColorSet.textPrimary};
-    text-decoration: none;
     display: block;
   }
 `
 
 const Sidebar: React.FC = () => {
-  const navigate = useNavigate();
-
   return (
     <div className={sidebarWrapperStyle}>
-      <Avatar />
-      <Link route={toplevelRoutes.exactRoute}>/</Link>
-      <Link route={toplevelRoutes._.top}>top</Link>
-      <a onClick={() => { 
-        navigate(templatesRoutes.exactRoute, { id: "2" })
-      }}>
-        templates
-      </a>
-      <Link route={templatesRoutes.exactRoute} match={{ id: "1" }}>Hello</Link>
-    </div>
+      <Link route={toplevelRoutes.exactRoute} className={plainLinkStyle}>
+        <Avatar />
+      </Link>
+      {/*
+        <Link route={toplevelRoutes._.templates} className={plainLinkStyle}>Templates</Link>
+        */}
+      </div>
   )
 }
 

@@ -1,18 +1,17 @@
 import * as React from 'react';
 import { Rocon, useRoutes } from 'rocon/react';
-import { TopPage } from '@/components/pages';
+import { TemplateDetailPage, TopPage } from '@/components/pages';
 
 const toplevelRoutes = Rocon.Path()
   .exact({ action: () => <TopPage /> })
-  .route("top", (route) => route.action(() => <p>TOP</p>))
-  .route("templates");
+  .route("templates", (route) => route.action(() => <div>Templates</div>) );
 
 const templatesRoutes =
   Rocon.Path()
     .any("id")
     .anyRoute
     .attach(Rocon.Path())
-    .exact({ action: ({id}) => <p>{id}</p> })
+    .exact({ action: ({id}) => <TemplateDetailPage templateId={id} /> })
     .route("detail", (route) => route.action(({id}) => 
       <p>Hello {id}</p>
     ));

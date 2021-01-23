@@ -8,4 +8,4 @@ type Template = {
   body: Body
 }
 
-export { Template }
+export { Template, ID }

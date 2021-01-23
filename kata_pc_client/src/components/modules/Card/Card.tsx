@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { css } from 'emotion';
 import { basicColorSet } from '@/consts/colors';
+import { Padding } from '@/components/commons/Padding';
 
 
 type CardProps = {
@@ -20,6 +21,7 @@ const Card = (props: CardProps): JSX.Element => {
   return (
     <div className={cardStyle(width, height)}>
       <h4>{props.title}</h4>
+      <Padding top={8} />
       <p>{props.content}</p>
     </div>
   )
@@ -32,9 +34,14 @@ const cardStyle = (width: string, height: string) => css`
   border-radius: 12px;
   padding: 12px;
   cursor: pointer;
+  overflow: hidden;
   
   &:hover {
     opacity: 0.7;
+  }
+
+  p {
+    font-size: 12px;
   }
 `
 

@@ -28,6 +28,14 @@ const baseConfig: webpack.Configuration = {
           }
         ]
       },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'file-loader',
+        options: {
+          publicPath: "images",
+          outputPath: "images"
+        },     
+      }
     ]  
   },
 }

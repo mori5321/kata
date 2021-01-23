@@ -1,12 +1,25 @@
-import { Template } from "@/domain/entities/template";
+import { Template, ID as TemplateID } from "@/domain/entities/template";
 import { ITemplateRepository } from "@/domain/repositories/templateRepository";
+import { none, some } from "fp-ts/lib/Option";
 
 const templateRepositoryOnMemory: ITemplateRepository = {
   list: () => mockTemplateStore,
+  findById: (id: TemplateID) => {
+    const template = mockTemplateStore.find(template => template.id === id)
+    if (!template)
+      return none
+
+    return some(template)
+  }
 }
 
 let mockTemplateStore: Template[] = [
-  { id: "aaa", title: "Hello", body: "World" },
+  { id: "aaa", title: "ワインレッドの心", body: `
+    今以上、これ以上、愛されるのに
+    あなたはその、透き通った瞳のままで、
+    あの消えそうに、燃えそうなワインレッドの
+    心を持つあなたの願いが、叶うのに
+  ` },
   { id: "bbb", title: "Hello", body: "WorldA" },
   { id: "ccc", title: "Hello", body: "WorldB" },
   { id: "ddd", title: "Hello", body: "WorldC" },

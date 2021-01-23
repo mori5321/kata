@@ -6,7 +6,7 @@ import { css } from "emotion";
 import { basicColorSet } from './consts/colors';
 import { Sidebar } from './components/modules/Sidebar';
 import { createMemoryHistory } from 'history';
-import { Routes } from "@/route"
+import { Routes } from "./router/route"
 
 const topWrapperStyle = css`
   height: 100vh;
