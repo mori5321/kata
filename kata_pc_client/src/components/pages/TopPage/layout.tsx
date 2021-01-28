@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { css } from 'emotion';
 import { Padding } from '@/components/commons/Padding';
-import { TemplateCard } from '@/components/modules/Card';
+import { AddTemplateCard, TemplateCard } from '@/components/modules/Card';
 import { SearchBar } from '@/components/modules/Search';
 import { Template } from '@/domain/entities/template';
 import { Link } from 'rocon/react';
@@ -27,18 +27,29 @@ const TopPageLayout: React.FC<TopPageLayoutProps> = (props) => (
       <SearchBar />
     </Padding>
     <div className={contentWrapper}>
-      { props.templates.map(template => (
-        <Link
-            route={templatesRoutes.exactRoute}
-            match={{ id: template.id }}
-            key={template.id}
-            className={plainLinkStyle}
-          >
-          <Padding top={8} left={8} right={8} bottom={8}>
-            <TemplateCard title={template.title} content={template.body} />
-          </Padding>
-        </Link>
-      )) }
+      <Link
+        route={templatesRoutes.exactRoute}
+        match={{ id: "a" }}
+        className={plainLinkStyle}
+      >
+        <Padding top={8} left={8} right={8} bottom={8}>
+          <AddTemplateCard />
+        </Padding>
+      </Link>
+      {
+        props.templates.map(template => (
+          <Link
+              route={templatesRoutes.exactRoute}
+              match={{ id: template.id }}
+              key={template.id}
+              className={plainLinkStyle}
+            >
+            <Padding top={8} left={8} right={8} bottom={8}>
+              <TemplateCard title={template.title} content={template.body} />
+            </Padding>
+          </Link>
+        ))
+      }
     </div>
   </div>
 )

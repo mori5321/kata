@@ -1,3 +1,8 @@
 node_modules
 *.dmg
 dist/mac/**/*
+dist/images/**/*
+dist/renderer.js
+dist/renderer.js.LICENSE.txt
+.DS_Store
+

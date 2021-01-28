@@ -2,6 +2,7 @@ import * as React from 'react';
 import { css } from 'emotion';
 import { basicColorSet } from '@/consts/colors';
 import { Padding } from '@/components/commons/Padding';
+import PlusIcon from 'assets/icons/plus.svg'
 
 
 type CardBaseProps = {
@@ -29,7 +30,6 @@ const cardBaseStyle = (width: string, height: string) => css`
   height: ${height};
   background-color: ${basicColorSet.backgroundTertiary};
   border-radius: 12px;
-  padding: 12px;
   cursor: pointer;
   overflow: hidden;
   
@@ -61,9 +61,44 @@ const TemplateCardBody = (props: TemplateCardBodyProps) => (
 )
 
 const templateCardBodyStyle = css`
+  padding: 12px;
+  
   p {
     font-size: 12px;
+    line-height: 100%;
   }
 `
 
-export { TemplateCard }
+type AddTemplateCardProps = Omit<CardBaseProps, "children"> & AddTemplateCardBodyProps
+const AddTemplateCard = (props: AddTemplateCardProps): JSX.Element => {
+  return (
+    <CardBase width={props.width} height={props.height}>
+      <AddTemplateCardBody />
+    </CardBase>
+  )
+}
+
+type AddTemplateCardBodyProps = {}
+const AddTemplateCardBody = (_props: AddTemplateCardBodyProps): JSX.Element => (
+  <div className={addTemplateCardBodyStyle}>
+    <img src={PlusIcon} className={plusIconStyle}/>
+  </div>
+)
+
+const addTemplateCardBodyStyle = css`
+  padding: 12px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${basicColorSet.backgroundSecondary};
+`
+
+const plusIconStyle = css`
+  width: 48px;
+  height: 48px;
+`
+
+
+
+export { TemplateCard, AddTemplateCard }
