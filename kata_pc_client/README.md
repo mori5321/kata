@@ -1,3 +1,6 @@
+# Dependencies
+node: 12.10.0
+
 # Launch Dev Server
 1. watch build process
 ```
