@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import { templateRepositoryOnPouchDB } from '@/adapters/repositories/templateRepository';
 import { Template } from '@/domain/entities/template';
+import { ITemplateFactory } from '@/domain/factories/templateFactory';
+import { TemplateFactory } from '@/adapters/factories/templateFactory';
 
 type UseTemplates = () => {
   templates: Template[],
+  addNewTemplate: () => Template,
 }
 
 const useTemplates: UseTemplates = () => {
@@ -24,7 +27,15 @@ const useTemplates: UseTemplates = () => {
 
   }, [])
 
-  return { templates }
+  const addNewTemplate = () => {
+    const factory: ITemplateFactory = TemplateFactory;
+    const newTemplate = factory.newTemplate("", "")
+    setTemplates([newTemplate, ...templates])
+    templateRepositoryOnMemory.add(newTemplate)
+    return newTemplate
+  }
+
+  return { templates, addNewTemplate }
 }
 
 export { useTemplates }

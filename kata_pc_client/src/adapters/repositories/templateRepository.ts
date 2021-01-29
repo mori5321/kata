@@ -1,6 +1,6 @@
 import { Template, ID as TemplateID } from "@/domain/entities/template";
 import { ITemplateRepository } from "@/domain/repositories/templateRepository";
-import { left, right } from "fp-ts/lib/Either";
+import { Either, left, right } from "fp-ts/lib/Either";
 import { none, some } from "fp-ts/lib/Option";
 import PouchDB from 'pouchdb';
 
