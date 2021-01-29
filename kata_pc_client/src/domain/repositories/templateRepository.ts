@@ -1,9 +1,11 @@
 import { Template, ID as TemplateID } from "@/domain/entities/Template";
+import { Either } from "fp-ts/lib/Either";
 import { Option } from "fp-ts/lib/Option";
 
 interface ITemplateRepository {
-  list: () => Template[]
-  findById: (id: TemplateID) => Option<Template>
+  list: () => Promise<Template[]>
+  findById: (id: TemplateID) => Promise<Option<Template>>
+  add: (template: Template) => Promise<Either<string, void>> // Leftの値をErrorにしたいね。
 }
 
 export { ITemplateRepository }
