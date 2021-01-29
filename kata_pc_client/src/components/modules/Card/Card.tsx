@@ -73,14 +73,19 @@ type AddTemplateCardProps = Omit<CardBaseProps, "children"> & AddTemplateCardBod
 const AddTemplateCard = (props: AddTemplateCardProps): JSX.Element => {
   return (
     <CardBase width={props.width} height={props.height}>
-      <AddTemplateCardBody />
+      <AddTemplateCardBody onClick={props.onClick} />
     </CardBase>
   )
 }
 
-type AddTemplateCardBodyProps = {}
-const AddTemplateCardBody = (_props: AddTemplateCardBodyProps): JSX.Element => (
-  <div className={addTemplateCardBodyStyle}>
+type AddTemplateCardBodyProps = {
+  onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void 
+}
+const AddTemplateCardBody = (props: AddTemplateCardBodyProps): JSX.Element => (
+  <div
+    onClick={props.onClick}
+    className={addTemplateCardBodyStyle}
+  >
     <img src={PlusIcon} className={plusIconStyle}/>
   </div>
 )

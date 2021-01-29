@@ -20,6 +20,7 @@ const contentWrapper = css`
 
 type TopPageLayoutProps = {
   templates: Template[]
+  onClickAddTemplate: () => void
 }
 const TopPageLayout: React.FC<TopPageLayoutProps> = (props) => ( 
   <div className={wrapperStyle}>
@@ -27,15 +28,9 @@ const TopPageLayout: React.FC<TopPageLayoutProps> = (props) => (
       <SearchBar />
     </Padding>
     <div className={contentWrapper}>
-      <Link
-        route={templatesRoutes.exactRoute}
-        match={{ id: "a" }}
-        className={plainLinkStyle}
-      >
-        <Padding top={8} left={8} right={8} bottom={8}>
-          <AddTemplateCard />
-        </Padding>
-      </Link>
+      <Padding top={8} left={8} right={8} bottom={8}>
+        <AddTemplateCard onClick={props.onClickAddTemplate} />
+      </Padding>
       {
         props.templates.map(template => (
           <Link

@@ -3,10 +3,17 @@ import { useTemplates } from './hooks';
 import { TopPageLayout } from './layout';
 
 const TopPage: React.FC = () => {
-  const { templates } = useTemplates()
+  const { templates, addNewTemplate } = useTemplates()
+
+  const onClickAddTemplate = () => {
+    addNewTemplate()
+  }
   
   return (
-    <TopPageLayout templates={templates} />
+    <TopPageLayout
+      templates={templates}
+      onClickAddTemplate={onClickAddTemplate}
+    />
   )
 }
 

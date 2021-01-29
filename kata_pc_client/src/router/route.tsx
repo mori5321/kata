@@ -4,7 +4,12 @@ import { TemplateDetailPage, TopPage } from '@/components/pages';
 
 const toplevelRoutes = Rocon.Path()
   .exact({ action: () => <TopPage /> })
-  .route("templates", (route) => route.action(() => <div>Templates</div>) );
+  .route("templates")
+  // .route("templates.new", route => route.action(() => {
+  //   return (
+  //     <div>Sample</div>
+  //   );
+  // }));
 
 const templatesRoutes =
   Rocon.Path()
@@ -17,6 +22,10 @@ const templatesRoutes =
     ));
 
 toplevelRoutes._.templates.attach(templatesRoutes)
+
+// TODO for Rocon:
+// multi attachができたらいいな
+// toplevelRoutes._.templates.attach(templatesRoutes)
 
 const Routes: React.FC = () => {
   return useRoutes(toplevelRoutes)

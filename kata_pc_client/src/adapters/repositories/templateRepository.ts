@@ -1,5 +1,6 @@
 import { Template, ID as TemplateID } from "@/domain/entities/template";
 import { ITemplateRepository } from "@/domain/repositories/templateRepository";
+import { Either, right } from "fp-ts/lib/Either";
 import { none, some } from "fp-ts/lib/Option";
 
 const templateRepositoryOnMemory: ITemplateRepository = {
@@ -10,6 +11,11 @@ const templateRepositoryOnMemory: ITemplateRepository = {
       return none
 
     return some(template)
+  },
+  add: (template: Template): Either<string, void> => {
+    mockTemplateStore = [...mockTemplateStore, template]
+
+    return right(undefined)
   }
 }
 
