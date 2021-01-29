@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { templateRepositoryOnMemory } from '@/adapters/repositories/templateRepository';
+import { templateRepositoryOnPouchDB } from '@/adapters/repositories/templateRepository';
 import { Template } from '@/domain/entities/template';
 import { ITemplateFactory } from '@/domain/factories/templateFactory';
 import { TemplateFactory } from '@/adapters/factories/templateFactory';
@@ -19,8 +19,12 @@ const useTemplates: UseTemplates = () => {
     // 2. APIに切り替え
     // みたいなのを開発環境でもスマートにやりたい
     //
-    const templatesFromRepository = templateRepositoryOnMemory.list();
-    setTemplates(templatesFromRepository);
+    (async() => {
+      const templatesFromRepository
+        = await templateRepositoryOnPouchDB.list();
+      setTemplates(templatesFromRepository);
+    })();
+
   }, [])
 
   const addNewTemplate = () => {

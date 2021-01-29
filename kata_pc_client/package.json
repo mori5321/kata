@@ -30,9 +30,11 @@
   "dependencies": {
     "@emotion/core": "^11.0.0",
     "@emotion/react": "^11.1.4",
+    "@types/pouchdb": "^6.4.0",
     "emotion": "^10.0.0",
     "fp-ts": "^2.9.3",
     "history": "^5.0.0",
+    "pouchdb": "^7.2.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "rocon": "^v1.2.1",

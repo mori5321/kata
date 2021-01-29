@@ -3,9 +3,9 @@ import { Either } from "fp-ts/lib/Either";
 import { Option } from "fp-ts/lib/Option";
 
 interface ITemplateRepository {
-  list: () => Template[]
-  findById: (id: TemplateID) => Option<Template>
-  add: (template: Template) => Either<string, void>
+  list: () => Promise<Template[]>
+  findById: (id: TemplateID) => Promise<Option<Template>>
+  add: (template: Template) => Promise<Either<string, void>> // Leftの値をErrorにしたいね。
 }
 
 export { ITemplateRepository }
