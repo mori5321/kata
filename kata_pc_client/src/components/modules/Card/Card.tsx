@@ -29,7 +29,7 @@ const cardBaseStyle = (width: string, height: string) => css`
   width: ${width};
   height: ${height};
   background-color: ${basicColorSet.backgroundTertiary};
-  border-radius: 12px;
+    border-radius: 12px;
   cursor: pointer;
   overflow: hidden;
   
