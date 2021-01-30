@@ -6,6 +6,7 @@ interface ITemplateRepository {
   list: () => Promise<Template[]>
   findById: (id: TemplateID) => Promise<Option<Template>>
   add: (template: Template) => Promise<Either<string, void>> // Leftの値をErrorにしたいね。
+  update: (newTemplate: Template) => Promise<Either<string, void>>
 }
 
 export { ITemplateRepository }

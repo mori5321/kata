@@ -4,7 +4,7 @@ import { basicColorSet } from '@/consts/colors';
 import { Padding } from '@/components/commons/Padding';
 import PlusIcon from 'assets/icons/plus.svg'
 
-
+// CardBase =====================================================
 type CardBaseProps = {
   width?: string,
   height?: string,
@@ -36,9 +36,9 @@ const cardBaseStyle = (width: string, height: string) => css`
   &:hover {
     opacity: 0.7;
   }
-
 `
 
+// TemplateCard =============================================================
 type TemplateCardProps = Omit<CardBaseProps, "children"> & TemplateCardBodyProps
 const TemplateCard = (props: TemplateCardProps): JSX.Element => {
   return (
@@ -54,7 +54,7 @@ type TemplateCardBodyProps = {
 }
 const TemplateCardBody = (props: TemplateCardBodyProps) => (
   <div className={templateCardBodyStyle}>
-    <h4>{props.title}</h4>
+    <TemplateCardTitle title={props.title} />
     <Padding top={8} />
     <p>{props.content}</p>
   </div>
@@ -69,6 +69,18 @@ const templateCardBodyStyle = css`
   }
 `
 
+const TemplateCardTitle = (props: { title: string }) => {
+  if (props.title.length === 0)
+    return <h4 className={noContentStyle}>Untitled</h4>
+
+  return <h4>{props.title}</h4>
+}
+
+const noContentStyle = css`
+  color: ${basicColorSet.textTertiary}
+`
+
+// AddTemplateCard =========================================================
 type AddTemplateCardProps = Omit<CardBaseProps, "children"> & AddTemplateCardBodyProps
 const AddTemplateCard = (props: AddTemplateCardProps): JSX.Element => {
   return (
@@ -103,7 +115,5 @@ const plusIconStyle = css`
   width: 48px;
   height: 48px;
 `
-
-
 
 export { TemplateCard, AddTemplateCard }

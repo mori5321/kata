@@ -21,6 +21,7 @@ enum ColorPallete {
 type ColorKeys =
   | "textPrimary"
   | "textSecondary"
+  | "textTertiary"
   | "backgroundPrimary"
   | "backgroundSecondary"
   | "backgroundTertiary"
@@ -36,6 +37,7 @@ type ColorSet = { [Key in ColorKeys]: Color };
 const basicColorSet: ColorSet = {
   textPrimary: ColorPallete.gofun,
   textSecondary: ColorPallete.kawasago,
+  textTertiary: ColorPallete.nibi,
   backgroundPrimary: ColorPallete.katsu,
   backgroundSecondary: ColorPallete.usuzumi,
   backgroundTertiary: ColorPallete.suzuri,

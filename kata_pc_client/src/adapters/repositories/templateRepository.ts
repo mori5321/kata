@@ -1,6 +1,6 @@
 import { Template, ID as TemplateID } from "@/domain/entities/template";
 import { ITemplateRepository } from "@/domain/repositories/templateRepository";
-import { Either, left, right } from "fp-ts/lib/Either";
+import { left, right } from "fp-ts/lib/Either";
 import { none, some } from "fp-ts/lib/Option";
 import PouchDB from 'pouchdb';
 
@@ -14,9 +14,18 @@ const templateRepositoryOnMemory: ITemplateRepository = {
     return some(template)
   },
   add: async (template) => {
-    mockTemplateStore.push(template)
+    mockTemplateStore = [template, ...mockTemplateStore]
+    return right(undefined)
+  },
+  update: async(newTemplate) => {
+    const idx = mockTemplateStore.findIndex(template => template.id === newTemplate.id ) // TODO: EntityでEquals的な関数あったほうがいいよね
+    mockTemplateStore = replace(mockTemplateStore, idx, newTemplate)
     return right(undefined)
   }
+}
+
+const replace = <T>(array: T[], targetIndex: number, newElement: T): T[] => {
+  return array.splice(targetIndex, 1, newElement)
 }
 
 let mockTemplateStore: Template[] = [
@@ -92,6 +101,23 @@ const templateRepositoryOnPouchDB: ITemplateRepository = {
     }
 
     return right(undefined)    
+  },
+  update: async(newTemplate: Template) => {
+    try {
+      const template = await templatesDB.get<TemplateDoc>(newTemplate.id);
+
+      // Memo: toDoc的なメソッドで解決しよう
+      await templatesDB.put({
+        _rev: template._rev,
+        _id: newTemplate.id,
+        title: newTemplate.title,
+        body: newTemplate.body,
+      })
+
+      return right(undefined)
+    } catch {
+      return left("Not Found")
+    }
   }
 }
 

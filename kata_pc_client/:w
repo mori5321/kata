@@ -23,46 +23,16 @@ const TemplateDetailLayout: React.FC<Props> = ({ template, onChangeTitle, onChan
   const titleRef = React.useRef<HTMLInputElement | null>(null)
   const bodyRef = React.useRef<HTMLTextAreaElement | null>(null)
 
-  const handleKeyPressOnTitle = (e: React.KeyboardEvent) => {
-    if (composing) return;
-    if (e.key === 'Enter' || e.key === 'ArrowDown') {
-      e.preventDefault();
+  const handleKeyPressEnterOnTitle = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !composing) {
       bodyRef.current?.focus()
     }
   }
 
-  const handleKeyDownCaptureOnBodyTextArea = (e: React.KeyboardEvent) => {
-    const selectionEnd = bodyRef.current?.selectionEnd ?? 0;
-    if (e.key === 'ArrowUp') {
-      const currentLinePosition
-        = getCursorLinePosition(selectionEnd, template.body)
-      if (currentLinePosition > 1) return;
-      e.preventDefault()
-      titleRef.current?.focus();
+  const handleKeyUpDeleteOnBodyTextArea = (e: React.KeyboardEvent) => {
+    if (e.key === 'Backspace' && template.body.length <= 0) {
+      titleRef.current?.focus
     }
-    if (template.body.length > 0) return;
-    if (e.key === 'Backspace') {
-      e.preventDefault()
-      titleRef.current?.focus()
-    }
-  }
-
-  const getCursorLinePosition = (selectionEnd: number, text: string) => {
-    const lines = text.split('\n');
-    const charCountPerLine = lines.map(line => line.length + 1)
-    if (charCountPerLine.length > 0 && charCountPerLine[0] > 0) {
-      charCountPerLine[0] -= 1;
-    }
-    let linePosition = 0;
-    let sum = 0;
-    for(let i = 0; i < charCountPerLine.length; i++){
-      sum += charCountPerLine[i];
-      if (selectionEnd <= sum) {
-        linePosition = i + 1;
-        break;
-      }
-    }
-    return linePosition;
   }
 
 
@@ -85,11 +55,13 @@ const TemplateDetailLayout: React.FC<Props> = ({ template, onChangeTitle, onChan
         <Title title={template.title}
           onChange={onChangeTitle}
           ref={titleRef}
-          handleKeyPress={handleKeyPressOnTitle}
+          handleKeyPressEnter={handleKeyPressEnterOnTitle}
           onCompositionStart={(_) => {
+            console.log("Start")
             setComposing(true)
           }}
           onCompositionEnd={(_) => {
+            console.log("End")
             setComposing(false)}
           }
         />
@@ -100,7 +72,7 @@ const TemplateDetailLayout: React.FC<Props> = ({ template, onChangeTitle, onChan
             value={template.body} onChange={(e) => {
               onChangeBody(e.target.value)
             }}
-            onKeyDownCapture={handleKeyDownCaptureOnBodyTextArea}
+            onKeyUp={handleKeyUpDeleteOnBodyTextArea}
           />
         </div>
       </div>
@@ -138,13 +110,12 @@ const backLinkStyle = css`
   display: flex;
   align-items: center;
   color: ${basicColorSet.textSecondary}
-  font-weight: bold;
 `
 
 type TitleProps = {
   title: string,
   onChange: (title: string) => void,
-  handleKeyPress: (e: React.KeyboardEvent) => void
+  handleKeyPressEnter: (e: React.KeyboardEvent) => void
   onCompositionStart: (e: React.CompositionEvent<HTMLInputElement>) => void,
   onCompositionEnd: (e: React.CompositionEvent<HTMLInputElement>) => void,
 }
@@ -166,9 +137,9 @@ const Title = React.forwardRef((
       ref={inputRef}
       className={titleStyle}
       value={props.title}
-      placeholder="Untitled"
+      placeholder="untitled"
       onChange={e => props.onChange(e.target.value)}
-      onKeyDownCapture={props.handleKeyPress}
+      onKeyPress={props.handleKeyPressEnter}
       onCompositionStart={props.onCompositionStart}
       onCompositionEnd={props.onCompositionEnd}
     />

@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/lodash": "^4.14.168",
     "@types/mini-css-extract-plugin": "^1.2.2",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
@@ -34,10 +35,12 @@
     "emotion": "^10.0.0",
     "fp-ts": "^2.9.3",
     "history": "^5.0.0",
+    "lodash": "^4.17.20",
     "pouchdb": "^7.2.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "rocon": "^v1.2.1",
+    "use-debounce": "^5.2.0",
     "uuid": "^8.3.2"
   },
   "build": {
