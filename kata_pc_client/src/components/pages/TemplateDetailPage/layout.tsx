@@ -148,7 +148,7 @@ const toolFieldStyles = css`
 const backLinkStyle = css`
   display: flex;
   align-items: center;
-  color: ${basicColorSet.textSecondary}
+  color: ${basicColorSet.textPrimary};
   font-weight: bold;
 `;
 
@@ -204,8 +204,7 @@ const bodyStyle = css`
   :focus {
     outline: none;
   }
-  font-size: 24px;
-  // resize: none;
+  font-size: 18px;
   background-color: transparent;
   color: ${basicColorSet.textPrimary};
 `;
