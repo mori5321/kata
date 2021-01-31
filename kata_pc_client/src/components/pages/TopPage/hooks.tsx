@@ -31,7 +31,8 @@ const useTemplates: UseTemplates = () => {
     const factory: ITemplateFactory = TemplateFactory;
     const newTemplate = factory.newTemplate("", "")
     setTemplates([newTemplate, ...templates])
-    templateRepositoryOnMemory.add(newTemplate)
+    // awaitしなくてもよい?
+    templateRepositoryOnPouchDB.add(newTemplate)
     return newTemplate
   }
 

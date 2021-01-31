@@ -1,0 +1,177 @@
+import * as React from 'react';
+import { css,cx } from 'emotion';
+import { Template } from '../../../domain/entities/template';
+import { Link } from 'rocon/react';
+import { toplevelRoutes } from '@/router/route';
+import { plainLinkStyle } from '@/router/linkStyle';
+import DeleteIcon from 'assets/icons/delete.svg';
+import { Padding } from '@/components/commons/Padding';
+import { CopyIconButton } from '@/components/commons/Buttons/IconButtons';
+import LeftArrowIcon from 'assets/icons/leftArrow.svg';
+import { basicColorSet } from '@/consts/colors';
+// import { DebouncedState } from 'use-debounce/lib/useDebouncedCallback';
+
+type Props = {
+  template: Template,
+  onChangeTitle: (title: string) => void,
+  onChangeBody: (body: string) => void,
+}
+
+
+const TemplateDetailLayout: React.FC<Props> = ({ template, onChangeTitle, onChangeBody }) => {
+  const [composing, setComposing] = React.useState<boolean>(false)
+  const titleRef = React.useRef<HTMLInputElement | null>(null)
+  const bodyRef = React.useRef<HTMLTextAreaElement | null>(null)
+
+  const handleKeyPressEnterOnTitle = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !composing) {
+      bodyRef.current?.focus()
+    }
+  }
+
+  const handleKeyUpDeleteOnBodyTextArea = (e: React.KeyboardEvent) => {
+    if (e.key === 'Backspace' && template.body.length <= 0) {
+      titleRef.current?.focus
+    }
+  }
+
+
+  return (
+    <>
+      <div className={wrapperStyle}>
+        <div className={subHeaderStyle}>
+          <Link route={toplevelRoutes.exactRoute} className={cx(plainLinkStyle, backLinkStyle)}>
+            <img src={LeftArrowIcon} width="16px" height="16px" />
+            <Padding right={4} />
+            Back
+          </Link>
+          <div className={toolFieldStyles}>
+            <img src={DeleteIcon} width="32px" height="32px" />
+            <Padding left={8} />
+            <CopyIconButton onClick={() => alert("Copy")} />
+          </div>
+        </div>
+        <div className={contentStyle}>
+        <Title title={template.title}
+          onChange={onChangeTitle}
+          ref={titleRef}
+          handleKeyPressEnter={handleKeyPressEnterOnTitle}
+          onCompositionStart={(_) => {
+            console.log("Start")
+            setComposing(true)
+          }}
+          onCompositionEnd={(_) => {
+            console.log("End")
+            setComposing(false)}
+          }
+        />
+          <Padding top={16} />
+          <textarea
+            ref={bodyRef}  
+            className={bodyStyle}
+            value={template.body} onChange={(e) => {
+              onChangeBody(e.target.value)
+            }}
+            onKeyUp={handleKeyUpDeleteOnBodyTextArea}
+          />
+        </div>
+      </div>
+    </>
+  )
+}
+
+const wrapperStyle = css`
+  padding: 8px 24px; 
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+`
+
+const subHeaderStyle = css`
+  padding: 8px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const contentStyle = css`
+  padding: 24px 0;
+  display: block;
+  height: 100%;
+`
+
+const toolFieldStyles = css`
+  display: flex;
+  align-items: center;
+`
+
+const backLinkStyle = css`
+  display: flex;
+  align-items: center;
+  color: ${basicColorSet.textSecondary}
+`
+
+type TitleProps = {
+  title: string,
+  onChange: (title: string) => void,
+  handleKeyPressEnter: (e: React.KeyboardEvent) => void
+  onCompositionStart: (e: React.CompositionEvent<HTMLInputElement>) => void,
+  onCompositionEnd: (e: React.CompositionEvent<HTMLInputElement>) => void,
+}
+const Title = React.forwardRef((
+  props: TitleProps,
+  ref,
+) => {
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
+  React.useImperativeHandle(ref, () => ({
+    focus: () => {
+      if (!inputRef.current)
+        return;
+      inputRef.current.focus()
+    },
+  }));
+    
+  return (
+    <input
+      ref={inputRef}
+      className={titleStyle}
+      value={props.title}
+      placeholder="untitled"
+      onChange={e => props.onChange(e.target.value)}
+      onKeyPress={props.handleKeyPressEnter}
+      onCompositionStart={props.onCompositionStart}
+      onCompositionEnd={props.onCompositionEnd}
+    />
+  )
+})
+
+const titleStyle = css`
+  color: ${basicColorSet.textPrimary};
+  outline: none;
+  :focus {
+    outline: none;
+  }
+  border: none;
+  background-color: transparent;
+  font-size: 40px;
+  font-weight: bold;
+  width: 100%;
+`
+
+const bodyStyle = css`
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: none;
+  outline: none;
+  :focus {
+    outline: none;
+  }
+  font-size: 24px;
+  // resize: none;
+  background-color: transparent;
+  color: ${basicColorSet.textPrimary};
+`
+
+export { TemplateDetailLayout }

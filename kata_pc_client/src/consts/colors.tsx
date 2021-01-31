@@ -21,21 +21,21 @@ enum ColorPallete {
 type ColorKeys =
   | "textPrimary"
   | "textSecondary"
+  | "textTertiary"
   | "backgroundPrimary"
   | "backgroundSecondary"
   | "backgroundTertiary"
   | "backgroundQuaternary"
   | "backgroundQuinary"
   | "accentPrimary"
-  | "accentSecondary"
-  
+  | "accentSecondary";
 
 type ColorSet = { [Key in ColorKeys]: Color };
-
 
 const basicColorSet: ColorSet = {
   textPrimary: ColorPallete.gofun,
   textSecondary: ColorPallete.kawasago,
+  textTertiary: ColorPallete.nibi,
   backgroundPrimary: ColorPallete.katsu,
   backgroundSecondary: ColorPallete.usuzumi,
   backgroundTertiary: ColorPallete.suzuri,
@@ -43,6 +43,19 @@ const basicColorSet: ColorSet = {
   backgroundQuinary: ColorPallete.sumi,
   accentPrimary: ColorPallete.sora,
   accentSecondary: ColorPallete.kamenozoki,
-}
+};
 
-export { basicColorSet }
+const lightColorSet: ColorSet = {
+  textPrimary: ColorPallete.usuzumi,
+  textSecondary: ColorPallete.kawasago,
+  textTertiary: ColorPallete.kawasago,
+  backgroundPrimary: ColorPallete.kawasago,
+  backgroundSecondary: ColorPallete.jinzamomi,
+  backgroundTertiary: ColorPallete.gofun,
+  backgroundQuaternary: ColorPallete.sakura,
+  backgroundQuinary: ColorPallete.kamenozoki,
+  accentPrimary: ColorPallete.jinzamomi,
+  accentSecondary: ColorPallete.hanahada,
+};
+
+export { basicColorSet, lightColorSet };
